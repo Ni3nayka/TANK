@@ -44,7 +44,10 @@ bool GamePad::button_first_tap(unsigned int number) {
 
 int GamePad::joystick(unsigned int number) {
   if(_error) return; 
-  return _ps2x.Analog(number)-127;
+  int t = _ps2x.Analog(number)-127;
+  if (abs(t)<3) t = 0;
+  else if (number==PSS_LY||number==PSS_RY) t *= -1;
+  return t;
 }
 
 void setup(){
@@ -59,9 +62,12 @@ void loop(){
       Serial.println(button_name[i]);
     }
   }
-  /*for (int i=0; i<joystick_quantity; i++) {
+  //Serial.println(gamepad.joystick(PSS_LY));
+  for (int i=0; i<joystick_quantity; i++) {
     if (gamepad.joystick(joystick_code[i])!=0) {
-      Serial.println(joystick_name[i]);
+      Serial.print(joystick_name[i]);
+      Serial.print(" ");
+      Serial.println(gamepad.joystick(joystick_code[i]));
     }
-  }*/  
+  }  
 }

@@ -14,7 +14,7 @@ const unsigned int button_quantity = 16;
 const unsigned int button_code[button_quantity] = {PSB_START,PSB_SELECT,PSB_PAD_UP,PSB_PAD_RIGHT,PSB_PAD_LEFT,PSB_PAD_DOWN,PSB_L2,PSB_R2,PSB_GREEN,PSB_RED,PSB_PINK,PSB_BLUE,PSB_L1,PSB_R1,PSB_L3,PSB_R3};
 const String button_name[button_quantity] = {"PSB_START","PSB_SELECT","PSB_PAD_UP","PSB_PAD_RIGHT","PSB_PAD_LEFT","PSB_PAD_DOWN","PSB_L2","PSB_R2","PSB_GREEN","PSB_RED","PSB_PINK","PSB_BLUE","PSB_L1","PSB_R1","PSB_L3","PSB_R3"};
 
-const unsigned int joystick_quantity = 16;
+const unsigned int joystick_quantity = 4;
 const unsigned int joystick_code[joystick_quantity] = {PSS_LY,PSS_LX ,PSS_RY,PSS_RX};
 const String joystick_name[joystick_quantity] = {"PSS_LY","PSS_LX","PSS_RY","PSS_RX"};
 
