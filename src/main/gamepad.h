@@ -48,3 +48,56 @@ PSS_LX
 PSS_RY
 PSS_RX
 */
+
+class GamePad {
+  public:
+    void setup();
+    void update(int vibro=-1);
+    int joystick(unsigned int number);
+    bool button(unsigned int number);
+    bool button_first_tap(unsigned int number);
+    bool vibration = 0;
+    PS2X _ps2x; // create PS2 Controller Class
+  private:
+    int _error = 5; 
+};
+
+GamePad gamepad;
+
+void GamePad::setup(){
+  Serial.print("connecting with joystick");
+  while (_error){ 
+    _error = _ps2x.config_gamepad(PS2_clock,PS2_command,PS2_attention,PS2_data, PS2_Pressures, PS2_Rumble); 
+    Serial.print(".");
+  }
+  Serial.println();
+  Serial.println("joystick connect");
+}
+
+void GamePad::update(int vibro=-1) { 
+  if (vibro>=0) vibration = vibro; 
+  if(_error) return; 
+  _ps2x.read_gamepad(false, vibration*255);
+  delay(50); 
+}
+
+bool GamePad::button(unsigned int number) {
+  if(_error) return 0;
+  return _ps2x.Button(number);
+}
+
+bool GamePad::button_first_tap(unsigned int number) {
+  if(_error) return 0;
+  return _ps2x.ButtonPressed(number);
+}
+
+int GamePad::joystick(unsigned int number) {
+  if(_error) return; 
+  int t = _ps2x.Analog(number)-127;
+  if (abs(t)<3) t = 0;
+  else {
+    if (number==PSS_LY||number==PSS_RY) t *= -1;
+    t = map(t,-128,127,-100,100);
+  }
+  return t;
+}
