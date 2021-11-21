@@ -63,7 +63,7 @@ unsigned char PS2X::_gamepad_shiftinout (char byte) {
         CLK_SET();
 #if CTRL_CLK_HIGH
         delayMicroseconds(CTRL_CLK_HIGH);
-#endif	  
+#endif
     }
     CMD_SET();
     delayMicroseconds(CTRL_BYTE_DELAY);
@@ -127,7 +127,7 @@ boolean PS2X::read_gamepad(boolean motor1, byte motor2) {
     if ((PS2data[1] & 0xf0) != 0x70) {
         if (read_delay < 10)
             read_delay++;	// see if this helps out...
-    }	
+    }
 
 
 #ifdef PS2X_COM_DEBUG
@@ -144,7 +144,7 @@ boolean PS2X::read_gamepad(boolean motor1, byte motor2) {
         Serial.print(PS2data[i+9], HEX);
         Serial.print(" ");
     }
-    Serial.println("");	
+    Serial.println("");
 #endif
 
     last_buttons = buttons; //store the previous buttons states
@@ -180,25 +180,25 @@ byte PS2X::config_gamepad(uint8_t clk, uint8_t cmd, uint8_t att, uint8_t dat, bo
 #else
 
     uint32_t            lport;                   // Port number for this pin
-    _clk_mask = digitalPinToBitMask(clk); 
+    _clk_mask = digitalPinToBitMask(clk);
     lport = digitalPinToPort(clk);
     _clk_lport_set = portOutputRegister(lport) + 2;
     _clk_lport_clr = portOutputRegister(lport) + 1;
 
-    _cmd_mask = digitalPinToBitMask(cmd); 
+    _cmd_mask = digitalPinToBitMask(cmd);
     lport = digitalPinToPort(cmd);
     _cmd_lport_set = portOutputRegister(lport) + 2;
     _cmd_lport_clr = portOutputRegister(lport) + 1;
 
-    _att_mask = digitalPinToBitMask(att); 
+    _att_mask = digitalPinToBitMask(att);
     lport = digitalPinToPort(att);
     _att_lport_set = portOutputRegister(lport) + 2;
     _att_lport_clr = portOutputRegister(lport) + 1;
 
-    _dat_mask = digitalPinToBitMask(dat); 
+    _dat_mask = digitalPinToBitMask(dat);
     _dat_lport = portInputRegister(digitalPinToPort(dat));
 
-#endif  
+#endif
 
     pinMode(clk, OUTPUT); //configure ports
     pinMode(att, OUTPUT);
@@ -206,7 +206,7 @@ byte PS2X::config_gamepad(uint8_t clk, uint8_t cmd, uint8_t att, uint8_t dat, bo
     pinMode(dat, INPUT);
 
 #if defined(__AVR__)
-    digitalWrite(dat, HIGH); //enable pull-up 
+    digitalWrite(dat, HIGH); //enable pull-up
 #endif
 
     CMD_SET(); // SET(*_cmd_oreg,_cmd_mask);
@@ -227,7 +227,7 @@ byte PS2X::config_gamepad(uint8_t clk, uint8_t cmd, uint8_t att, uint8_t dat, bo
         return 1; //return error code 1
     }
 
-    //try setting mode, increasing delays if need be. 
+    //try setting mode, increasing delays if need be.
     read_delay = 1;
 
     for(int y = 0; y <= 10; y++)
@@ -296,7 +296,7 @@ void PS2X::sendCommandString(byte string[], byte len) {
     for (int y=0; y < len; y++)
         temp[y] = _gamepad_shiftinout(string[y]);
 
-    ATT_SET(); //high disable joystick  
+    ATT_SET(); //high disable joystick
     delay(read_delay);                  //wait a few
 
     Serial.println("OUT:IN Configure");
@@ -313,7 +313,7 @@ void PS2X::sendCommandString(byte string[], byte len) {
     for (int y=0; y < len; y++)
         _gamepad_shiftinout(string[y]);
 
-    ATT_SET(); //high disable joystick  
+    ATT_SET(); //high disable joystick
     delay(read_delay);                  //wait a few
 #endif
 }
@@ -428,14 +428,14 @@ inline void  PS2X::CMD_CLR(void) {
 inline void  PS2X::ATT_SET(void) {
     register uint8_t old_sreg = SREG;
     cli();
-    *_att_oreg |= _att_mask ; 	
+    *_att_oreg |= _att_mask ;
     SREG = old_sreg;
 }
 
 inline void PS2X::ATT_CLR(void) {
     register uint8_t old_sreg = SREG;
     cli();
-    *_att_oreg &= ~_att_mask; 
+    *_att_oreg &= ~_att_mask;
     SREG = old_sreg;
 }
 
