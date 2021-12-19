@@ -16,14 +16,14 @@ void motor(byte number, int speed) {
     if (speed==0)     { AF_DCMotor_motor_1.run(RELEASE);  AF_DCMotor_motor_2.run(RELEASE);  }
     else if (speed>0) { AF_DCMotor_motor_1.run(FORWARD);  AF_DCMotor_motor_2.run(FORWARD);  }
     else              { AF_DCMotor_motor_1.run(BACKWARD); AF_DCMotor_motor_2.run(BACKWARD); }
-    AF_DCMotor_motor_1.setSpeed(speed);
-    AF_DCMotor_motor_2.setSpeed(speed);
+    AF_DCMotor_motor_1.setSpeed(abs(speed));
+    AF_DCMotor_motor_2.setSpeed(abs(speed));
   }
   else if (number==2) {
     if (speed==0)     { AF_DCMotor_motor_3.run(RELEASE);  AF_DCMotor_motor_4.run(RELEASE);  }
     else if (speed>0) { AF_DCMotor_motor_3.run(FORWARD);  AF_DCMotor_motor_4.run(FORWARD);  }
     else              { AF_DCMotor_motor_3.run(BACKWARD); AF_DCMotor_motor_4.run(BACKWARD); }
-    AF_DCMotor_motor_3.setSpeed(speed);
-    AF_DCMotor_motor_4.setSpeed(speed);
+    AF_DCMotor_motor_3.setSpeed(abs(speed));
+    AF_DCMotor_motor_4.setSpeed(abs(speed));
   }
 }
