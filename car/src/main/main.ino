@@ -1,6 +1,5 @@
 #include "gamepad.h"
 #include "motor.h"
-#include "voltmetr.h"
 
 void setup(){
   Serial.begin(9600);

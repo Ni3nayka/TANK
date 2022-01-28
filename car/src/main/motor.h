@@ -1,29 +1,35 @@
 #pragma once
 #include <Arduino.h>
-#include "AFMotor.h"  //for v1.6
 
-#define LEFT 1
+#define LEFT  1
 #define RIGHT 2
 
-AF_DCMotor AF_DCMotor_motor_1(1);
-AF_DCMotor AF_DCMotor_motor_2(2);
-AF_DCMotor AF_DCMotor_motor_3(3);
-AF_DCMotor AF_DCMotor_motor_4(4);
+#define MOTOR_PWM_A   1
+#define MOTOR_DIR_A_1 1
+#define MOTOR_DIR_A_2 1
+#define MOTOR_PWM_B   1
+#define MOTOR_DIR_B_1 1
+#define MOTOR_DIR_B_2 1
+
+void setup_motor() {
+  pinMode(MOTOR_PWM_A,  OUTPUT);
+  pinMode(MOTOR_PWM_B,  OUTPUT);
+  pinMode(MOTOR_DIR_A_1,OUTPUT);
+  pinMode(MOTOR_DIR_A_2,OUTPUT);
+  pinMode(MOTOR_DIR_B_1,OUTPUT);
+  pinMode(MOTOR_DIR_B_2,OUTPUT);
+}
 
 void motor(byte number, int speed) {
   speed = map(constrain(speed,-100,100),-100,100,-255,255);
   if (number==1) {
-    if (speed==0)     { AF_DCMotor_motor_1.run(RELEASE);  AF_DCMotor_motor_2.run(RELEASE);  }
-    else if (speed>0) { AF_DCMotor_motor_1.run(FORWARD);  AF_DCMotor_motor_2.run(FORWARD);  }
-    else              { AF_DCMotor_motor_1.run(BACKWARD); AF_DCMotor_motor_2.run(BACKWARD); }
-    AF_DCMotor_motor_1.setSpeed(abs(speed));
-    AF_DCMotor_motor_2.setSpeed(abs(speed));
+    analogWrite(MOTOR_PWM_A, abs(speed));
+    digitalWrite(MOTOR_DIR_A_1,speed>0);
+    digitalWrite(MOTOR_DIR_A_2,speed<0);
   }
   else if (number==2) {
-    if (speed==0)     { AF_DCMotor_motor_3.run(RELEASE);  AF_DCMotor_motor_4.run(RELEASE);  }
-    else if (speed>0) { AF_DCMotor_motor_3.run(FORWARD);  AF_DCMotor_motor_4.run(FORWARD);  }
-    else              { AF_DCMotor_motor_3.run(BACKWARD); AF_DCMotor_motor_4.run(BACKWARD); }
-    AF_DCMotor_motor_3.setSpeed(abs(speed));
-    AF_DCMotor_motor_4.setSpeed(abs(speed));
+    analogWrite(MOTOR_PWM_B, abs(speed));
+    digitalWrite(MOTOR_DIR_B_1,speed>0);
+    digitalWrite(MOTOR_DIR_B_2,speed<0);
   }
 }
