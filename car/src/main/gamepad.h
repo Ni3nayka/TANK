@@ -30,7 +30,7 @@ void loop(){
 #include "PS2X_lib.h"  //for v1.6
 
 const uint8_t  PS2_clock          = A2;    // CLK
-const uint8_t  PS2_data           = 2;     // DAT (DTA)
+const uint8_t  PS2_data           = A0;    // DAT (DTA)
 const uint8_t  PS2_command        = A1;    // CMD
 const uint8_t  PS2_attention      = A3;    // ATT
 

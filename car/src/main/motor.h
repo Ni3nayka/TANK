@@ -4,12 +4,12 @@
 #define LEFT  1
 #define RIGHT 2
 
-#define MOTOR_PWM_A   1
-#define MOTOR_DIR_A_1 1
-#define MOTOR_DIR_A_2 1
-#define MOTOR_PWM_B   1
-#define MOTOR_DIR_B_1 1
-#define MOTOR_DIR_B_2 1
+#define MOTOR_PWM_A   5
+#define MOTOR_DIR_A_1 4
+#define MOTOR_DIR_A_2 3
+#define MOTOR_PWM_B   6
+#define MOTOR_DIR_B_1 7
+#define MOTOR_DIR_B_2 8
 
 void setup_motor() {
   pinMode(MOTOR_PWM_A,  OUTPUT);
