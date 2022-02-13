@@ -1,3 +1,5 @@
+// https://robot-kit.ru/DC-Motor-Driver-BTS7960/BTS7960/
+
 #pragma once
 #include <Arduino.h>
 
