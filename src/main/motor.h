@@ -11,7 +11,7 @@ AF_DCMotor AF_DCMotor_motor_3(3);
 AF_DCMotor AF_DCMotor_motor_4(4);
 
 
-void motor(byte number, int speed) {
+/*void motor(byte number, int speed) {
   speed = map(constrain(speed,-100,100),-100,100,-255,255);
   if (number==1) {
     if (speed==0)     AF_DCMotor_motor_1.run(RELEASE);
@@ -25,9 +25,8 @@ void motor(byte number, int speed) {
     else              AF_DCMotor_motor_2.run(BACKWARD);
     AF_DCMotor_motor_2.setSpeed(abs(speed));
   }
-}
+}*/
 
-/*
 void motor(byte number, int speed) {
   speed = map(constrain(speed,-100,100),-100,100,-255,255);
   if (number==1) {
@@ -44,4 +43,4 @@ void motor(byte number, int speed) {
     AF_DCMotor_motor_3.setSpeed(abs(speed));
     AF_DCMotor_motor_4.setSpeed(abs(speed));
   }
-}*/
+}

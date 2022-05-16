@@ -36,6 +36,19 @@ void loop(){
   gnu_tank.write(servo_val);
   povorot_bashni_gorizontal.write(servo_gorizontal_val);
   povorot_bashni_vertical.write(servo_vertical_val);
-  
-  gamepad.vibration = gamepad.button(PSB_RED);
+
+  if (gamepad.button(PSB_RED)) {
+    Serial.println(voltage());
+    motor(LEFT,  0);
+    motor(RIGHT, 0);
+    for (int i = test_voltage_for_pult(); i>0; i--) {
+      gamepad.vibration = 1;
+      gamepad.update();
+      delay(200);
+      gamepad.vibration = 0;
+      gamepad.update();
+      delay(200);
+    }
+  }
+  //gamepad.vibration = gamepad.button(PSB_RED);
 }
