@@ -11,12 +11,15 @@ int servo_val = 90;
 int servo_gorizontal_val = 90;
 int servo_vertical_val = 90;
 
+#define rezinkostrel_motor A4
+
 void setup(){
   Serial.begin(9600);
   gamepad.setup();
   gnu_tank.attach(9);
   povorot_bashni_gorizontal.attach(10);
   povorot_bashni_vertical.attach(A5);
+  pinMode(rezinkostrel_motor,OUTPUT);
 }
 
 void loop(){
@@ -50,5 +53,8 @@ void loop(){
       delay(200);
     }
   }
+
+  digitalWrite(rezinkostrel_motor,gamepad.button(PSB_L2)||gamepad.button(PSB_R2)||gamepad.button(PSB_L1)||gamepad.button(PSB_R1));
+  
   //gamepad.vibration = gamepad.button(PSB_RED);
 }
